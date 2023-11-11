@@ -67,6 +67,46 @@
             bindings = <&kp PIPE>;
             key-positions = <14 15>;
         };
+
+        qrt {
+            bindings = <&kp SINGLE_QUOTE>;
+            key-positions = <17 18>;
+        };
+
+        sqt {
+            bindings = <&kp DOUBLE_QUOTES>;
+            key-positions = <17 18 26>;
+        };
+
+        lessthan {
+            bindings = <&kp LESS_THAN>;
+            key-positions = <25 27>;
+        };
+
+        greater {
+            bindings = <&kp GREATER_THAN>;
+            key-positions = <25 28>;
+        };
+
+        grave {
+            bindings = <&kp GRAVE>;
+            key-positions = <3 4>;
+        };
+
+        tidle {
+            bindings = <&kp TILDE>;
+            key-positions = <5 6>;
+        };
+
+        xiahu {
+            bindings = <&kp UNDERSCORE>;
+            key-positions = <15 17>;
+        };
+
+        plus {
+            bindings = <&kp PLUS>;
+            key-positions = <15 18>;
+        };
     };
 
     behaviors {
@@ -96,6 +136,22 @@
             global-quick-tap;
             quick-tap-ms = <200>;
         };
+        ht: ht {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HT";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <100>;
+            quick-tap-ms = <200>;
+            flavor = "tap-preferred";
+        };
+        td_0: td_0 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TD_0";
+            #binding-cells = <0>;
+            bindings = <&mo 1>, <&kp LCTRL>;
+        };
     };
 
     keymap {
@@ -103,28 +159,28 @@
 
         default_layer {
             bindings = <
-&kp Q           &kp W                    &kp E               &kp R  &kp T  &kp Y                &kp U  &kp I      &kp O       &kp P
-&kp A           &kp S                    &kp D               &kp F  &kp G  &kp H                &kp J  &kp K      &kp L       &kp COLON
-&kp Z           &kp X                    &kp C               &kp V  &kp B  &kp N                &kp M  &kp COMMA  &kp PERIOD  &kp FSLH
-       &kp TAB         &ltq 1 BACKSPACE         &lt 2 ENTER         &mo 3  &ltq 2 SPACE  &mo 4
+&kp Q                        &kp W             &kp E                  &kp R           &kp T  &kp Y         &kp U  &kp I      &kp O      &kp P
+&kp A                        &kp S             &kp D                  &kp F           &kp G  &kp H         &kp J  &kp K      &kp L      &kp BSPC
+&ht LEFT_SHIFT Z             &kp X             &ht LEFT_ALT C         &ht LEFT_GUI V  &kp B  &kp N         &kp M  &kp COMMA  &kp SLASH  &ht RIGHT_SHIFT ENTER
+                  &kp LCTRL         &kp SPACE                  &td_0                  &mo 1  &mo 2  &mo 3
             >;
         };
 
         lower_layer {
             bindings = <
-&trans               &trans            &kp UP            &trans     &trans  &none               &kp N7  &kp N8  &kp N9  &trans
-&bootloader          &kp LEFT          &kp DOWN          &kp RIGHT  &trans  &kp MINUS           &kp N4  &kp N5  &kp N6  &kp SQT
-&trans               &trans            &trans            &trans     &trans  &trans              &kp N1  &kp N2  &kp N3  &trans
-             &trans            &trans            &trans             &trans  &kp N0     &kp DOT
+&kp N1             &kp N2             &kp N3                 &kp N4   &kp N5   &kp N6            &kp N7     &kp N8     &kp N9    &kp N0
+&kp A              &kp S              &kp LC(SPACE)          &kp F    &kp G    &kp SEMI          &kp MINUS  &kp EQUAL  &kp SQT   &kp BSPC
+&kp LSHFT          &kp X              &kp ESC                &kp DEL  &kp TAB  &kp BSLH          &kp LBKT   &kp DOT    &kp RBKT  &kp RET
+           &trans          &kp SPACE                 &trans           &trans   &trans    &trans
             >;
         };
 
         raise_layer {
             bindings = <
-&kp ESC               &kp KP_NUMBER_7          &kp KP_NUMBER_8          &kp KP_NUMBER_9  &kp KP_NUMBER_0  &kp HOME          &kp PAGE_UP     &kp UP    &kp PAGE_DOWN  &trans
-&kp CAPSLOCK          &kp KP_NUMBER_4          &kp KP_NUMBER_5          &kp KP_NUMBER_6  &kp AT           &kp END           &kp LEFT_ARROW  &kp DOWN  &kp RIGHT      &trans
-&kp DEL               &kp KP_N1                &kp KP_NUMBER_2          &kp KP_NUMBER_3  &kp DOT          &trans            &trans          &trans    &trans         &trans
-              &trans                   &trans                   &trans                   &trans           &trans    &trans
+&kp F1                &kp F2                &kp F3                &kp F4      &kp F5      &kp F6           &kp F7             &kp F8           &kp F9          &kp F10
+&kp CAPSLOCK          &trans                &trans                &trans      &kp F11     &kp END          &kp C_VOLUME_DOWN  &kp C_VOLUME_UP  &kp UP_ARROW    &kp RIGHT
+&bt BT_SEL 0          &bt BT_SEL 1          &bt BT_SEL 2          &bt BT_CLR  &kp F12     &trans           &trans             &kp LEFT_ARROW   &kp DOWN_ARROW  &kp ENTER
+              &trans                &trans                &trans              &kp C_MUTE  &trans   &trans
             >;
         };
 
